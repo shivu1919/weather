@@ -8,7 +8,7 @@ function App() {
 
   useEffect(()=>{
     const url = "https://api.weatherapi.com/v1/forecast.json"
-    const api_key = import.meta.env.VITE_API_KEY
+    const api_key = "412b492bf8de4497ae193119252801"
       fetch(`${url}?key=${api_key}&q=Aligarh`)
       .then(response=>response.json())
       .then(data=>{
@@ -21,7 +21,7 @@ function App() {
 
   const searchWeather =()=>{
       const url = "https://api.weatherapi.com/v1/forecast.json"
-      const api_key = import.meta.env.VITE_API_KEY
+      const api_key = "412b492bf8de4497ae193119252801"
         fetch(`${url}?key=${api_key}&q=${city}`)
         .then(response=>response.json())
         .then(data=>setWeather(data))
