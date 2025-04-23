@@ -2,16 +2,14 @@ import React, { useState, useEffect } from 'react'
 import './App.css'
 
 function App() {
-
   const[city, setCity] = useState('')
   const[temp, setTemp] = useState(false)
   const[weather, setWeather] = useState([])
 
   useEffect(()=>{
     const url = "https://api.weatherapi.com/v1/forecast.json"
-      const api_key = "key=412b492bf8de4497ae193119252801"
-
-      fetch(`${url}?${api_key}&q=Aligarh`)
+    const api_key = import.meta.env.VITE_API_KEY
+      fetch(`${url}?key=${api_key}&q=Aligarh`)
       .then(response=>response.json())
       .then(data=>{
         setWeather(data)
@@ -23,21 +21,13 @@ function App() {
 
   const searchWeather =()=>{
       const url = "https://api.weatherapi.com/v1/forecast.json"
-      const api_key = "key=412b492bf8de4497ae193119252801"
+      const api_key = import.meta.env.VITE_API_KEY
+        fetch(`${url}?key=${api_key}&q=${city}`)
+        .then(response=>response.json())
+        .then(data=>setWeather(data))
 
-      fetch(`${url}?${api_key}&q=${city}`)
-      .then(response=>response.json())
-      .then(data=>{
-        console.log(data)
-        setWeather(data)
-        setTemp(true)
-      })
-
-      setCity('')
+        setCity('')
   }
-
-
-
 
   return (
     <>
@@ -76,5 +66,7 @@ function App() {
     </>
   )
 }
+
+
 
 export default App
