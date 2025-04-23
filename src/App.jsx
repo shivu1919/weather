@@ -22,11 +22,19 @@ function App() {
   const searchWeather =()=>{
       const url = "https://api.weatherapi.com/v1/forecast.json"
       const api_key = "412b492bf8de4497ae193119252801"
+      
         fetch(`${url}?key=${api_key}&q=${city}`)
-        .then(response=>response.json())
-        .then(data=>setWeather(data))
-
-        setCity('')
+        .then(response=>{
+          if(!response.ok){
+            alert("Location not found")
+          }
+          else{
+            response.json()
+            .then(data=>setWeather(data))
+            setCity('')
+          }
+          })
+        
   }
 
   return (
